@@ -1,8 +1,9 @@
 name: Publish to GitHub Packages
 
 on:
-  release:
-    types: [published]  # create a GitHub Release to trigger
+  push:
+    branches:
+      - main   # or master
 
 permissions:
   contents: read
@@ -18,8 +19,10 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           scope: '@Aneeshpissay330'
-      - run: npm ci
+
+      - run: npm install
       - run: npm run build
+      - run: npm version patch -m "ci: bump version to %s"   # bump version automatically
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
