@@ -1,46 +1,25 @@
 name: Publish to GitHub Packages
 
 on:
-  push:
-    branches:
-      - master   # trigger on push to master branch
+  release:
+    types: [published]  # create a GitHub Release to trigger
 
 permissions:
-  contents: write   # needed to push commits/tags
-  packages: write   # needed to publish packages
+  contents: read
+  packages: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           scope: '@Aneeshpissay330'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build package
-        run: npm run build
-
-      - name: Configure Git for CI
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Bump version
-        run: |
-          npm version patch -m "ci: bump version to %s"
-          git push origin HEAD:master --tags
-
-      - name: Publish package
-        run: npm publish
+      - run: npm ci
+      - run: npm run build
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
