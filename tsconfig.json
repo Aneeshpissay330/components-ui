@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // Output folders
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Language & module settings
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler", // good for React libs
+    "jsx": "react-jsx",
+
+    // Declarations (for consumers' TS autocomplete)
+    "declaration": true,
+    "declarationMap": true,
+
+    // Source maps (optional, nice for debugging)
+    "sourceMap": true,
+
+    // Strictness
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+
+    // Module hygiene
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+
+    // Force module detection (prevents accidental script mode)
+    "moduleDetection": "force"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
