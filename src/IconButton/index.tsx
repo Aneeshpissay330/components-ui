@@ -5,12 +5,15 @@ export const IconButton: React.FC<IconButtonProps> = ({
   rounded = true,
   color = "#fff",
   backgroundColor = "#1f2937",
+  borderColor = "transparent",
   hoverEffect = true,
   size = 40,
   icon,
   style,
   ...props
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   const baseStyles: React.CSSProperties = {
     width: size,
     height: size,
@@ -22,6 +25,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
     justifyContent: "center",
     transition: "all 0.3s ease",
     cursor: "pointer",
+    border: `2px solid ${borderColor}`,
     ...style,
   };
 
@@ -29,10 +33,9 @@ export const IconButton: React.FC<IconButtonProps> = ({
     ? {
         color: backgroundColor,
         backgroundColor: color,
+        border: `2px solid ${backgroundColor}`, // 👈 reverse border on hover
       }
     : {};
-
-  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <button
