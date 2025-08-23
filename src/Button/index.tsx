@@ -3,38 +3,42 @@ import type { ButtonProps } from "./index.types";
 
 export const Button: React.FC<ButtonProps> = ({
   children,
-  rounded = true,
-  color = "#fff",
-  backgroundColor = "#1f2937",
-  hoverEffect = true,
-  fullWidth = false,
   leftIcon,
   rightIcon,
   style,
   ...props
 }) => {
+  // Define CSS variables (inside TSX)
+  const variables: Record<string, string | number> = {
+    "--btn-bg": "#000000",
+    "--btn-text": "#ffffff",
+    "--btn-hover-bg": "#1f2937", // gray-800
+    "--btn-border-radius": "9999px",
+    "--btn-padding-x": "2rem", // px-8
+    "--btn-padding-y": "1rem", // py-4
+    "--btn-font-weight": "500", // font-medium
+    "--btn-gap": "0.5rem",
+    "--btn-transition": "all 0.3s ease",
+  };
+
   const baseStyles: React.CSSProperties = {
-    padding: "0.5rem 1rem",
-    borderRadius: rounded ? "0.5rem" : "0.125rem",
-    color,
-    backgroundColor,
-    width: fullWidth ? "100%" : "auto",
-    textAlign: "center",
+    backgroundColor: `var(--btn-bg)`,
+    color: `var(--btn-text)`,
+    borderRadius: `var(--btn-border-radius)`,
+    padding: `var(--btn-padding-y) var(--btn-padding-x)`,
+    fontWeight: Number(variables["--btn-font-weight"]),
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "0.5rem",
-    transition: "all 0.3s ease",
+    gap: `var(--btn-gap)`,
+    transition: `var(--btn-transition)`,
     cursor: "pointer",
     ...style,
   };
 
-  const hoverStyles: React.CSSProperties = hoverEffect
-    ? {
-        color: backgroundColor,
-        backgroundColor: color,
-      }
-    : {};
+  const hoverStyles: React.CSSProperties = {
+    backgroundColor: `var(--btn-hover-bg)`,
+  };
 
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -42,6 +46,7 @@ export const Button: React.FC<ButtonProps> = ({
     <button
       {...props}
       style={{
+        ...variables,
         ...baseStyles,
         ...(isHovered ? hoverStyles : {}),
       }}
@@ -49,7 +54,7 @@ export const Button: React.FC<ButtonProps> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       {leftIcon && <span>{leftIcon}</span>}
-      {children}
+      <span>{children}</span>
       {rightIcon && <span>{rightIcon}</span>}
     </button>
   );
