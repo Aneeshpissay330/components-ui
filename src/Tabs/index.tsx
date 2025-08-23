@@ -32,10 +32,11 @@ export const Tabs: React.FC<TabsProps> = ({
               <button
                 key={tab.value}
                 onClick={() => onChange(tab.value)}
-                className={`tab-btn flex-1 font-medium transition-all inline-flex items-center justify-center gap-2 ${isActive
+                className={`tab-btn flex-1 font-medium transition-all inline-flex items-center justify-center gap-2 ${
+                  isActive
                     ? "bg-black text-white"
                     : "bg-transparent text-gray-700 hover:bg-gray-100"
-                  }`}
+                }`}
                 style={{
                   borderRadius: rounded ? "0.75rem" : "0.25rem",
                   padding: "0.75rem 1.5rem",
@@ -55,16 +56,7 @@ export const Tabs: React.FC<TabsProps> = ({
       {/* 👇 Render active tab content */}
       {activeTab && (
         <div
-          style={{
-            padding: "1rem",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderColor: borderColor,
-            borderRadius: "0.5rem",
-            marginTop: 16,
-            maxHeight: "300px",      // ✅ limit height
-            overflowY: "auto",       // ✅ enable vertical scroll
-          }}
+          style={{ padding: "1rem", border: `1px solid ${borderColor}`, borderRadius: "0.5rem", marginTop: 16 }}
         >
           {activeTab.content}
         </div>
