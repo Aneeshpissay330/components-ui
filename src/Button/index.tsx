@@ -8,15 +8,17 @@ export const Button: React.FC<ButtonProps> = ({
   style,
   ...props
 }) => {
-  // Define CSS variables (inside TSX)
+  // Define variables
   const variables: Record<string, string | number> = {
     "--btn-bg": "#000000",
     "--btn-text": "#ffffff",
-    "--btn-hover-bg": "#1f2937", // gray-800
-    "--btn-border-radius": "9999px",
+    "--btn-hover-bg": "#ffffff",
+    "--btn-hover-text": "#000000",
+    "--btn-border-color": "#000000",
+    "--btn-border-radius": "9999px", // fully rounded
     "--btn-padding-x": "2rem", // px-8
     "--btn-padding-y": "1rem", // py-4
-    "--btn-font-weight": "500", // font-medium
+    "--btn-font-weight": "500",
     "--btn-gap": "0.5rem",
     "--btn-transition": "all 0.3s ease",
   };
@@ -24,12 +26,13 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles: React.CSSProperties = {
     backgroundColor: `var(--btn-bg)`,
     color: `var(--btn-text)`,
+    border: "2px solid transparent",
     borderRadius: `var(--btn-border-radius)`,
     padding: `var(--btn-padding-y) var(--btn-padding-x)`,
     fontWeight: Number(variables["--btn-font-weight"]),
     display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "center", // centers icons + text vertically
+    justifyContent: "center", // keeps spacing even
     gap: `var(--btn-gap)`,
     transition: `var(--btn-transition)`,
     cursor: "pointer",
@@ -38,6 +41,8 @@ export const Button: React.FC<ButtonProps> = ({
 
   const hoverStyles: React.CSSProperties = {
     backgroundColor: `var(--btn-hover-bg)`,
+    color: `var(--btn-hover-text)`,
+    borderColor: `var(--btn-border-color)`,
   };
 
   const [isHovered, setIsHovered] = React.useState(false);
@@ -53,9 +58,9 @@ export const Button: React.FC<ButtonProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {leftIcon && <span>{leftIcon}</span>}
-      <span>{children}</span>
-      {rightIcon && <span>{rightIcon}</span>}
+      {leftIcon && <span style={{ display: "flex", alignItems: "center" }}>{leftIcon}</span>}
+      <span style={{ display: "flex", alignItems: "center" }}>{children}</span>
+      {rightIcon && <span style={{ display: "flex", alignItems: "center" }}>{rightIcon}</span>}
     </button>
   );
 };
