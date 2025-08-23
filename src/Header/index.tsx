@@ -1,7 +1,7 @@
 import React from "react";
 import type { HeaderProps } from "./index.types";
 
-const Header: React.FC<HeaderProps> = ({ logo, title, navLinks = [], rightContent }) => {
+export const Header: React.FC<HeaderProps> = ({ logo, title, navLinks = [], rightContent }) => {
   return (
     <header
       id="header"
@@ -43,5 +43,3 @@ const Header: React.FC<HeaderProps> = ({ logo, title, navLinks = [], rightConten
     </header>
   );
 };
-
-export default Header;
