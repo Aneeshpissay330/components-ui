@@ -26,13 +26,15 @@ export const Button: React.FC<ButtonProps> = ({
   const baseStyles: React.CSSProperties = {
     backgroundColor: `var(--btn-bg)`,
     color: `var(--btn-text)`,
-    border: "2px solid transparent",
+    borderWidth: "2px",
+    borderStyle: "solid",
+    borderColor: "transparent", // ✅ longhand instead of shorthand
     borderRadius: `var(--btn-border-radius)`,
     padding: `var(--btn-padding-y) var(--btn-padding-x)`,
     fontWeight: Number(variables["--btn-font-weight"]),
     display: "inline-flex",
-    alignItems: "center", // centers icons + text vertically
-    justifyContent: "center", // keeps spacing even
+    alignItems: "center",
+    justifyContent: "center",
     gap: `var(--btn-gap)`,
     transition: `var(--btn-transition)`,
     cursor: "pointer",
@@ -42,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
   const hoverStyles: React.CSSProperties = {
     backgroundColor: `var(--btn-hover-bg)`,
     color: `var(--btn-hover-text)`,
-    borderColor: `var(--btn-border-color)`,
+    borderColor: `var(--btn-border-color)`, // ✅ consistent with base
   };
 
   const [isHovered, setIsHovered] = React.useState(false);
