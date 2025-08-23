@@ -1,7 +1,7 @@
 import * as React from "react";
-import type { TextInputProps } from "./index.types";
+import type { TextInputProps, TextInputVariant } from "./index.types";
 
-const styles = {
+const baseStyles = {
   wrapper: {
     display: "inline-flex",
     flexDirection: "column" as const,
@@ -14,17 +14,15 @@ const styles = {
   },
   input: {
     flex: 1,
-    backgroundColor: "#f3f4f6", // light-gray
-    // ⬇️ replace shorthand border with longhand props
     borderWidth: "1px",
     borderStyle: "solid",
-    borderColor: "#d1d5db", // medium-gray
-    borderRadius: "9999px", // fully rounded
-    paddingLeft: "1.5rem", // px-6
+    borderColor: "#d1d5db", // default medium-gray
+    borderRadius: "9999px", // default fully rounded
+    paddingLeft: "1.5rem",
     paddingRight: "1.5rem",
-    paddingTop: "1rem", // py-4
+    paddingTop: "1rem",
     paddingBottom: "1rem",
-    fontSize: "1rem", // text-base
+    fontSize: "1rem",
     outline: "none",
     transition: "all 0.2s ease",
   } as React.CSSProperties,
@@ -36,6 +34,13 @@ const styles = {
 };
 
 export const TextInput: React.FC<TextInputProps> = ({
+  variant = "outlined",
+  fullWidth = true,
+  rounded = true,
+  color = "#000000",
+  backgroundColor = "#f3f4f6",
+  borderColor = "#d1d5db",
+  hoverEffect = false,
   leftIcon,
   rightIcon,
   error,
@@ -44,9 +49,30 @@ export const TextInput: React.FC<TextInputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
+  // compute dynamic styles
+  const dynamicStyles: React.CSSProperties = {
+    ...baseStyles.input,
+    color,
+    backgroundColor: variant === "contained" ? backgroundColor : "transparent",
+    borderColor: variant === "outlined" ? borderColor : "transparent",
+    borderBottomColor: variant === "underlined" ? borderColor : "transparent",
+    borderWidth: variant === "underlined" ? "0 0 1px 0" : "1px",
+    borderRadius: rounded ? "9999px" : "4px",
+    width: fullWidth ? "100%" : "auto",
+    ...(hoverEffect && {
+      transition: "all 0.2s ease",
+    }),
+    ...(isFocused
+      ? {
+          borderColor: "transparent",
+          boxShadow: "0 0 0 2px black",
+        }
+      : {}),
+  };
+
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.container}>
+    <div style={baseStyles.wrapper}>
+      <div style={baseStyles.container}>
         {leftIcon && (
           <span style={{ position: "absolute", left: 16, display: "flex", alignItems: "center" }}>
             {leftIcon}
@@ -55,15 +81,8 @@ export const TextInput: React.FC<TextInputProps> = ({
         <input
           {...props}
           style={{
-            ...styles.input,
-            ...(isFocused
-              ? {
-                  // Now safe to change borderColor since base is longhand
-                  borderColor: "transparent",
-                  boxShadow: "0 0 0 2px black", // focus:ring-2 focus:ring-black
-                }
-              : {}),
-            ...style,
+            ...dynamicStyles,
+            ...style, // allow external overrides
           }}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -74,7 +93,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           </span>
         )}
       </div>
-      {error && <span style={styles.error}>{error}</span>}
+      {error && <span style={baseStyles.error}>{error}</span>}
     </div>
   );
 };
