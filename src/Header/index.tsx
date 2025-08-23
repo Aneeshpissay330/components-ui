@@ -1,34 +1,97 @@
 import React from "react";
 import type { HeaderProps } from "./index.types";
 
+const styles = {
+  header: {
+    backdropFilter: "blur(10px)", // glass effect assumption
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
+    borderBottom: "1px solid #d1d5db",
+    position: "sticky" as const,
+    top: 0,
+    zIndex: 50,
+  },
+  container: {
+    maxWidth: "80rem", // max-w-7xl
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingLeft: "2rem",
+    paddingRight: "2rem",
+    paddingTop: "1.5rem",
+    paddingBottom: "1.5rem",
+  },
+  flexBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  left: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+  },
+  logo: {
+    height: "2.5rem",
+    width: "2.5rem",
+    objectFit: "contain" as const,
+  },
+  title: {
+    fontSize: "1.875rem",
+    fontWeight: "bold",
+    letterSpacing: "-0.02em",
+  },
+  nav: {
+    display: "flex",
+    gap: "2rem",
+    marginLeft: "2rem",
+  },
+  navLinkBase: {
+    cursor: "pointer",
+    paddingBottom: "0.25rem",
+    transition: "color 0.2s",
+  },
+  navLinkActive: {
+    color: "#000",
+    fontWeight: 500,
+    borderBottom: "2px solid #000",
+  },
+  navLinkInactive: {
+    color: "#4b5563",
+  },
+  right: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1rem",
+  },
+};
+
 export const Header: React.FC<HeaderProps> = ({ logo, title, navLinks = [], rightContent }) => {
   return (
-    <header
-      id="header"
-      className="glass-effect border-b border-medium-gray sticky top-0 z-50"
-    >
-      <div className="max-w-7xl mx-auto px-8 py-6">
-        <div className="flex justify-between items-center">
+    <header id="header" style={styles.header}>
+      <div style={styles.container}>
+        <div style={styles.flexBetween}>
           {/* Left Side: Logo + Title */}
-          <div className="flex items-center space-x-4">
-            {logo && (
-              <img src={logo} alt="Logo" className="h-10 w-10 object-contain" />
-            )}
-            <h1 className="text-3xl font-bold tracking-tighter">{title}</h1>
+          <div style={styles.left}>
+            {logo && <img src={logo} alt="Logo" style={styles.logo} />}
+            <h1 style={styles.title}>{title}</h1>
           </div>
 
           {/* Middle: Navigation */}
           {navLinks.length > 0 && (
-            <nav className="flex space-x-8 ml-8">
+            <nav style={styles.nav}>
               {navLinks.map((link, idx) => (
                 <a
                   key={idx}
                   href={link.href || "#"}
-                  className={`cursor-pointer pb-1 transition-colors ${
-                    link.active
-                      ? "text-black font-medium border-b-2 border-black"
-                      : "text-darker-gray hover:text-black"
-                  }`}
+                  style={{
+                    ...styles.navLinkBase,
+                    ...(link.active ? styles.navLinkActive : styles.navLinkInactive),
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!link.active) e.currentTarget.style.color = "#000";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!link.active) e.currentTarget.style.color = "#4b5563";
+                  }}
                 >
                   {link.label}
                 </a>
@@ -37,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ logo, title, navLinks = [], righ
           )}
 
           {/* Right Side: Custom Content */}
-          <div className="flex items-center space-x-4">{rightContent}</div>
+          <div style={styles.right}>{rightContent}</div>
         </div>
       </div>
     </header>
