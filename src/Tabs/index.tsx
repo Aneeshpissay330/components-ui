@@ -14,6 +14,8 @@ export const Tabs: React.FC<TabsProps> = ({
   style,
   ...props
 }) => {
+  const activeTab = tabs.find((t) => t.value === value);
+
   return (
     <div id="tab-bar" className={`mb-8 ${className || ""}`} style={style} {...props}>
       <div
@@ -39,6 +41,8 @@ export const Tabs: React.FC<TabsProps> = ({
                   borderRadius: rounded ? "0.75rem" : "0.25rem",
                   padding: "0.75rem 1.5rem",
                   width: fullWidth ? "100%" : "auto",
+                  backgroundColor: isActive ? backgroundColor : "transparent",
+                  color: isActive ? color : "#374151", // gray-700
                 }}
               >
                 {tab.icon && <span>{tab.icon}</span>}
@@ -48,6 +52,16 @@ export const Tabs: React.FC<TabsProps> = ({
           })}
         </div>
       </div>
+
+      {/* 👇 Render active tab content */}
+      {activeTab && (
+        <div
+          className="mt-4"
+          style={{ padding: "1rem", border: `1px solid ${borderColor}`, borderRadius: "0.5rem" }}
+        >
+          {activeTab.content}
+        </div>
+      )}
     </div>
   );
 };
