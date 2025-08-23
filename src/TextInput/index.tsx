@@ -15,7 +15,10 @@ const styles = {
   input: {
     flex: 1,
     backgroundColor: "#f3f4f6", // light-gray
-    border: "1px solid #d1d5db", // medium-gray
+    // ⬇️ replace shorthand border with longhand props
+    borderWidth: "1px",
+    borderStyle: "solid",
+    borderColor: "#d1d5db", // medium-gray
     borderRadius: "9999px", // fully rounded
     paddingLeft: "1.5rem", // px-6
     paddingRight: "1.5rem",
@@ -55,6 +58,7 @@ export const TextInput: React.FC<TextInputProps> = ({
             ...styles.input,
             ...(isFocused
               ? {
+                  // Now safe to change borderColor since base is longhand
                   borderColor: "transparent",
                   boxShadow: "0 0 0 2px black", // focus:ring-2 focus:ring-black
                 }
