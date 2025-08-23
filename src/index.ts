@@ -1,8 +1,10 @@
 export * from "./Button";
-export * from "./TextInput";
-export * from "./TextArea";
-export * from "./Switch";
-export * from "./IconButton";
-export * from "./Tabs";
+export * from "./Footer";
 export * from "./Header";
+export * from "./IconButton";
 export * from "./RadioGroup";
+export * from "./Switch";
+export * from "./Tabs";
+export * from "./TextArea";
+export * from "./TextInput";
+
