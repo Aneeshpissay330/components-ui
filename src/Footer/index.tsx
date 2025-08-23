@@ -25,7 +25,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     },
 };
 
-const Footer: React.FC<FooterProps> = ({ title }) => {
+export const Footer: React.FC<FooterProps> = ({ title }) => {
     const currentYear = new Date().getFullYear();
 
     return (
@@ -40,5 +40,3 @@ const Footer: React.FC<FooterProps> = ({ title }) => {
         </footer>
     );
 };
-
-export default Footer;
