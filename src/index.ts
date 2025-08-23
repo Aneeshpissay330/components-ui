@@ -4,3 +4,4 @@ export * from "./TextArea";
 export * from "./Switch";
 export * from "./IconButton";
 export * from "./Tabs";
+export * from "./Header";
