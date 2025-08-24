@@ -4,7 +4,6 @@ import type { HeaderProps } from "./index.types";
 const styles = {
   header: {
     backdropFilter: "blur(10px)", // glass effect assumption
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
     borderBottom: "1px solid #d1d5db",
     position: "sticky" as const,
     top: 0,
