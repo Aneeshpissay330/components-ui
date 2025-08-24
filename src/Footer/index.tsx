@@ -7,7 +7,6 @@ const styles: { [key: string]: React.CSSProperties } = {
         bottom: 0,
         left: 0,
         right: 0,
-        background: "#ffffff",
         borderTop: "1px solid #d1d5db",
         backdropFilter: "blur(6px)",
         zIndex: 40,
