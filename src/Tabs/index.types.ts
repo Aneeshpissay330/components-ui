@@ -18,4 +18,5 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "o
   borderColor?: string;       // border around group
   hoverEffect?: boolean;      // default true
   fullWidth?: boolean;
+  sectionBgColor?: string;       // ✅ NEW: background for the whole tab section
 }

@@ -9,6 +9,7 @@ export const Tabs: React.FC<TabsProps> = ({
   activeTextColor = "#ffffff",
   activeBgColor = "#000000",
   borderColor = "#d1d5db",
+  sectionBgColor = "#ffffff", // ✅ default section background
   hoverEffect = true,
   fullWidth = true,
   className,
@@ -20,10 +21,12 @@ export const Tabs: React.FC<TabsProps> = ({
   return (
     <div id="tab-bar" className={`mb-8 ${className || ""}`} style={style} {...props}>
       <div
-        className="bg-white shadow-sm p-2"
         style={{
+          backgroundColor: sectionBgColor,
           border: `1px solid ${borderColor}`,
           borderRadius: rounded ? "1rem" : "0.25rem",
+          boxShadow: "0 1px 2px rgba(0,0,0,0.05)", // shadow-sm equivalent
+          padding: "0.5rem", // p-2
         }}
       >
         <div className="flex space-x-2">
@@ -39,9 +42,9 @@ export const Tabs: React.FC<TabsProps> = ({
                   padding: "0.75rem 1.5rem",
                   width: fullWidth ? "100%" : "auto",
                   backgroundColor: isActive ? activeBgColor : "transparent",
-                  color: isActive ? activeTextColor : "#374151",
+                  color: isActive ? activeTextColor : "#374151", // gray-700 default
                   ...(hoverEffect && !isActive
-                    ? { backgroundColor: "transparent", transition: "all 0.2s ease" }
+                    ? { transition: "all 0.2s ease" }
                     : {}),
                 }}
               >
