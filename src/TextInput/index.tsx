@@ -26,6 +26,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   color = "#000",
   backgroundColor = "#f3f4f6",
   borderColor = "#d1d5db",
+  focusedBorderColor = "#000",   // 🔥 default black if not provided
   leftIcon,
   rightIcon,
   error,
@@ -34,7 +35,6 @@ export const TextInput: React.FC<TextInputProps> = ({
 }) => {
   const [isFocused, setIsFocused] = React.useState(false);
 
-  // Start with properties common to all variants
   const inputStyle: React.CSSProperties = {
     ...base.input,
     color,
@@ -44,38 +44,33 @@ export const TextInput: React.FC<TextInputProps> = ({
   };
 
   if (variant === "outlined") {
-    // Use ONLY all-sides props; never side-specific here
     Object.assign(inputStyle, {
       borderWidth: "1px",
-      borderColor,                 // all sides
+      borderColor,
     });
     if (isFocused) {
-      // keep using only all-sides props
-      inputStyle.borderColor = "transparent";
-      inputStyle.boxShadow = "0 0 0 2px black";
+      inputStyle.borderColor = focusedBorderColor;
+      inputStyle.boxShadow = `0 0 0 2px ${focusedBorderColor}`;
     }
   } else if (variant === "underlined") {
-    // Use ONLY side-specific props; never borderColor here
     Object.assign(inputStyle, {
       borderWidth: "0 0 1px 0",
       borderTopColor: "transparent",
       borderRightColor: "transparent",
       borderLeftColor: "transparent",
       borderBottomColor: borderColor,
-      borderRadius: 0, // underlines usually not pill-shaped
+      borderRadius: 0,
     });
     if (isFocused) {
-      // change only the bottom border color (no borderColor!)
-      inputStyle.borderBottomColor = "black";
+      inputStyle.borderBottomColor = focusedBorderColor;
       inputStyle.boxShadow = "none";
     }
   } else {
-    // contained without outline
     Object.assign(inputStyle, {
       borderWidth: 0,
     });
     if (isFocused) {
-      inputStyle.boxShadow = "0 0 0 2px black";
+      inputStyle.boxShadow = `0 0 0 2px ${focusedBorderColor}`;
     }
   }
 
@@ -103,3 +98,4 @@ export const TextInput: React.FC<TextInputProps> = ({
     </div>
   );
 };
+

@@ -8,7 +8,8 @@ export interface TextInputProps extends React.InputHTMLAttributes<HTMLInputEleme
   rounded?: boolean;
   color?: string; // text color
   backgroundColor?: string; // for contained variant
-  borderColor?: string; // for outlined/underlined
+  borderColor?: string; // for outlined/underlined default
+  focusedBorderColor?: string; // 🔥 new: focused border color
   hoverEffect?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
