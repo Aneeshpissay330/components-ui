@@ -13,9 +13,9 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "o
   onChange: (value: string) => void;
 
   rounded?: boolean;
-  color?: string; // active tab text/icon color
-  backgroundColor?: string; // active tab background
-  borderColor?: string; // tab border
-  hoverEffect?: boolean; // reverse hover
-  fullWidth?: boolean; // stretch tabs equally
+  activeTextColor?: string;   // ✅ instead of color
+  activeBgColor?: string;     // ✅ instead of backgroundColor
+  borderColor?: string;       // border around group
+  hoverEffect?: boolean;      // default true
+  fullWidth?: boolean;
 }
