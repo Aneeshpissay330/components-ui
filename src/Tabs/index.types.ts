@@ -15,6 +15,7 @@ export interface TabsProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "o
   rounded?: boolean;
   activeTextColor?: string;   // ✅ instead of color
   activeBgColor?: string;     // ✅ instead of backgroundColor
+  inactiveTextColor?: string;    // ✅ new: inactive tab text color
   borderColor?: string;       // border around group
   hoverEffect?: boolean;      // default true
   fullWidth?: boolean;

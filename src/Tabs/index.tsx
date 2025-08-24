@@ -8,8 +8,9 @@ export const Tabs: React.FC<TabsProps> = ({
   rounded = true,
   activeTextColor = "#ffffff",
   activeBgColor = "#000000",
+  inactiveTextColor = "#374151", // ✅ default gray-700
   borderColor = "#d1d5db",
-  sectionBgColor = "#ffffff", // ✅ default section background
+  sectionBgColor = "#ffffff",
   hoverEffect = true,
   fullWidth = true,
   className,
@@ -25,8 +26,8 @@ export const Tabs: React.FC<TabsProps> = ({
           backgroundColor: sectionBgColor,
           border: `1px solid ${borderColor}`,
           borderRadius: rounded ? "1rem" : "0.25rem",
-          boxShadow: "0 1px 2px rgba(0,0,0,0.05)", // shadow-sm equivalent
-          padding: "0.5rem", // p-2
+          boxShadow: "0 1px 2px rgba(0,0,0,0.05)",
+          padding: "0.5rem",
         }}
       >
         <div className="flex space-x-2">
@@ -42,7 +43,7 @@ export const Tabs: React.FC<TabsProps> = ({
                   padding: "0.75rem 1.5rem",
                   width: fullWidth ? "100%" : "auto",
                   backgroundColor: isActive ? activeBgColor : "transparent",
-                  color: isActive ? activeTextColor : "#374151", // gray-700 default
+                  color: isActive ? activeTextColor : inactiveTextColor,
                   ...(hoverEffect && !isActive
                     ? { transition: "all 0.2s ease" }
                     : {}),
@@ -56,7 +57,6 @@ export const Tabs: React.FC<TabsProps> = ({
         </div>
       </div>
 
-      {/* Active tab content */}
       {activeTab && (
         <div
           style={{
