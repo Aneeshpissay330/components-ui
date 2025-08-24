@@ -6,54 +6,48 @@ export const Button: React.FC<ButtonProps> = ({
   leftIcon,
   rightIcon,
   style,
+  color = "#ffffff",            // default text color
+  backgroundColor = "#000000",   // default bg color
+  hoverEffect = true,
+  rounded = true,
+  fullWidth = false,
   ...props
 }) => {
-  // Define variables
-  const variables: Record<string, string | number> = {
-    "--btn-bg": "#000000",
-    "--btn-text": "#ffffff",
-    "--btn-hover-bg": "#ffffff",
-    "--btn-hover-text": "#000000",
-    "--btn-border-color": "#000000",
-    "--btn-border-radius": "9999px", // fully rounded
-    "--btn-padding-x": "2rem", // px-8
-    "--btn-padding-y": "1rem", // py-4
-    "--btn-font-weight": "500",
-    "--btn-gap": "0.5rem",
-    "--btn-transition": "all 0.3s ease",
-  };
+  const [isHovered, setIsHovered] = React.useState(false);
 
+  // Base styles
   const baseStyles: React.CSSProperties = {
-    backgroundColor: `var(--btn-bg)`,
-    color: `var(--btn-text)`,
+    backgroundColor,
+    color,
     borderWidth: "2px",
     borderStyle: "solid",
-    borderColor: "transparent", // ✅ longhand instead of shorthand
-    borderRadius: `var(--btn-border-radius)`,
-    padding: `var(--btn-padding-y) var(--btn-padding-x)`,
-    fontWeight: Number(variables["--btn-font-weight"]),
+    borderColor: backgroundColor, // border matches bg by default
+    borderRadius: rounded ? "9999px" : "6px",
+    padding: "1rem 2rem", // py-4 px-8
+    fontWeight: 500,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: `var(--btn-gap)`,
-    transition: `var(--btn-transition)`,
+    gap: "0.5rem",
+    transition: "all 0.3s ease",
     cursor: "pointer",
+    width: fullWidth ? "100%" : "auto",
     ...style,
   };
 
-  const hoverStyles: React.CSSProperties = {
-    backgroundColor: `var(--btn-hover-bg)`,
-    color: `var(--btn-hover-text)`,
-    borderColor: `var(--btn-border-color)`, // ✅ consistent with base
-  };
-
-  const [isHovered, setIsHovered] = React.useState(false);
+  // Hover styles
+  const hoverStyles: React.CSSProperties = hoverEffect
+    ? {
+        backgroundColor: color,          // invert colors on hover
+        color: backgroundColor,
+        borderColor: backgroundColor,
+      }
+    : {};
 
   return (
     <button
       {...props}
       style={{
-        ...variables,
         ...baseStyles,
         ...(isHovered ? hoverStyles : {}),
       }}
