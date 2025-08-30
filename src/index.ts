@@ -7,4 +7,5 @@ export * from "./Switch";
 export * from "./Tabs";
 export * from "./TextArea";
 export * from "./TextInput";
-
+export * from "./Dialog";
+export * from "./Modal";
