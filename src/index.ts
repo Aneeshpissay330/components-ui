@@ -9,3 +9,4 @@ export * from "./TextArea";
 export * from "./TextInput";
 export * from "./Dialog";
 export * from "./Modal";
+export * from "./NextHeader";
