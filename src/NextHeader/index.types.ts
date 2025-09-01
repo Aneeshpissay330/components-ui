@@ -7,8 +7,12 @@ export interface NavLink {
 }
 
 export interface HeaderProps {
-  logo?: string; // optional image url
+  logo?: string;
   title: string;
   navLinks?: NavLink[];
-  rightContent?: React.ReactNode; // custom content (buttons, avatar, etc.)
+  rightContent?: React.ReactNode;
+  activeColor?: string;        // text color for active nav link
+  inactiveColor?: string;      // text color for inactive nav link
+  activeBorderColor?: string;  // border bottom color for active link
 }
+
