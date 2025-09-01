@@ -36,5 +36,8 @@
     "ui",
     "components",
     "private"
-  ]
+  ],
+  "dependencies": {
+    "next": "^15.5.2"
+  }
 }
